@@ -1,27 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="table.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-    <div>
-        <table id="table">
-            <tr>
-                <th>Table Number</th>
-                <th>Booked By</th>
-                <th>Phone Number</th>
-                <th>No of Persons</th>
-                <th>Dining Start Time</th>
-                <th>Dining End Time</th>
-            </tr>
-            <tr>
-                <td>No Records Available</td>
-            </tr>
-        </table>
+    <div id="content">
+        <div id="btns">
+            <input type="number" placeholder="enter the table number" style="width: 200px; border-radius: 10px;">
+            <button id="sort" onclick="style_change_sort()" onmouseleave="style_change1_sort()">Sort</button>
+            <button id="add" onclick="style_change_add()" onmouseleave="style_change1_add()">Add</button>
+        </div>
+        <div id="table_div">
+            <table id="table">
+                <tr>
+                    <th>Table Number</th>
+                    <th>Booked By</th>
+                    <th>Phone Number</th>
+                    <th>No of Persons</th>
+                    <th>Dining Start Time</th>
+                    <th>Dining End Time</th>
+                    <th>Actions</th>
+                </tr>
+                <tr id="first">
+                    <td>No Records Available</td>
+                    <td><i class="fa-solid fa-pen" style="color: #ff0033;" onclick="edit_page()"></i></td>
+                    <td><i class="fa-solid fa-trash" onclick="del_icon(this)"></i></td>
+                </tr>
+            </table>
+        </div>
     </div>
+
+    <dialog id="dialog_box">
+        <div id="top-div">
+        <p id="add_label">Add</p>
+        <button id="cross-btn" onclick="close_dialog()">
+            <i class="fa-solid fa-xmark" style="font-size: 20px;width: 100%;height: 100%;color:black;display: flex;align-items: center;justify-content: center;"></i>
+        </button>
+    </div>
+        <form id="form">
+            <div class="form_ele">
+                <div class="label">
+                <label for="table_no">Table Number:</label>
+            </div>
+            <div class="input">
+                <select name="table_no" id="table_no">
+                    <option>101</option>
+                </select>
+            </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="booked_by" style="width: 100%;">Booked by:</label>
+                </div>
+                <div class="input">
+                    <input id="booker_name" type="text" name="booked_by" style="width: 100%;" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="phone">Phone Number:</label>
+                </div>
+                <div class="input">
+                    <input id="phone_no" type="number" name="phone" max="1000000000" pattern="[0-9]{10}"/>
+                    <p id="no_people_err"></p>
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="no_people">No of Persons:</label>
+                </div>
+                <div class="input">
+                    <input id="no_people" type="number" name="no_people" max="10" min="5" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="table_no">Dining Start Time:</label>
+                </div>
+                <div class="input">
+                    <input id="dining_start" type="datetime-local" name="table_no" oninput="set_end()"/>
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="table_no">Dining End Time:</label>
+                </div>
+                <div class="input">
+                    <input id="dining_end" type="datetime-local" name="table_no" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="save">
+                    <button id="save-btn" onclick="save()">Save</button>
+                </div>
+                <div class="reset">
+                    <button id="reset-btn">Reset</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="dialog_box_edit">
+        <div id="top-div">
+        <p id="add_label">Edit</p>
+        <button id="cross-btn" onclick="close_dialog_edit()">
+            <i class="fa-solid fa-xmark" style="font-size: 20px;width: 100%;height: 100%;color:black;display: flex;align-items: center;justify-content: center;"></i>
+        </button>
+    </div>
+        <form id="form">
+            <div class="form_ele">
+                <div class="label">
+                <label for="table_no">Table Number:</label>
+            </div>
+            <div class="input">
+                <select name="table_no" id="table_no_edit">
+                    <option>101</option>
+                </select>
+            </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="booked_by" style="width: 100%;">Booked by:</label>
+                </div>
+                <div class="input">
+                    <input id="booker_name_edit" type="text" name="booked_by" style="width: 100%;" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="phone">Phone Number:</label>
+                </div>
+                <div class="input">
+                    <input id="phone_no_edit" type="number" name="phone" max="1000000000" pattern="[0-9]{10}"/>
+                    <p id="no_people_err"></p>
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="no_people">No of Persons:</label>
+                </div>
+                <div class="input">
+                    <input id="no_people_edit" type="number" name="no_people" max="10" min="5" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="table_no">Dining Start Time:</label>
+                </div>
+                <div class="input">
+                    <input id="dining_start_edit" type="datetime-local" name="table_no" oninput="set_end()"/>
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="label">
+                    <label for="table_no">Dining End Time:</label>
+                </div>
+                <div class="input">
+                    <input id="dining_end_edit" type="datetime-local" name="table_no" />
+                </div>
+            </div>
+            <div class="form_ele">
+                <div class="save">
+                    <button id="save-btn_edit" >Save</button>
+                </div>
+                <div class="reset">
+                    <button id="reset-btn_edit">Reset</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
     <script src="table.js"></script>
 </body>
+
 </html>
+<!-- <td><i class="fa-solid fa-pen" style="color: #ff0033;" onclick="edit_page()"></i></td>
+<td><i class="fa-solid fa-trash" onclick="del_icon(this)"></i></td> -->

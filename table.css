@@ -6,6 +6,15 @@ html{
     height: 100%;
     width: 100%;
 }
+#content{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
 body{
     height: 100%;
     width: 100%;
@@ -16,18 +25,135 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 table,th{
-    border: 1px solid white;
+    border: 1px solid black;
+    color: black;
     border-collapse: collapse;
-    color: white;
-    padding: 10px;
     font-family: cursive;
+    background-color: white;
 }
 tr{
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: cursive;
+    border:1px solid black;
+}
+td,th{
+    padding: 10px;
+}
+#btns{
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+}
+#add{
+    width: 75px;
+    height: 35px;
+    font-family: cursive;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: none;
+    border: 2px solid black;
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+#sort{
+    width: 75px;
+    height: 35px;
+    font-family: cursive;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: none;
+    border: 2px solid black;
+    background-color:khaki;
+    cursor: pointer;
+}
+#dialog_box{
+    border-radius: 20px;
+    position: absolute;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+}
+#form{
+    font-family: cursive;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 30px;
+}
+.form_ele{
+    height: 100%;
+    display: flex;
+}
+.label,.input{
+    width: 50%;
+}
+label,input{
+    width: 100%;
+}
+.save{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reset{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#save-btn{
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    background-color:greenyellow;
+    border-radius: 20px;
+    font-family: cursive;
+}
+#reset-btn{
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    background-color: lightcoral;
+    border-radius: 20px;
+    font-family: cursive;
+}
+#top-div{
+    width: 100%;background-color:aqua;height: 40px;border-bottom: 2px solid black;
+}
+#add_label{
+    width: 50%;padding: 8px;font-family: cursive;
+}
+#cross-btn{
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+#table_no{
+    width: 100%;
+}
+#dialog_box_edit{
+    border-radius: 20px;
+    position: absolute;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
 }
