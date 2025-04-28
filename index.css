@@ -83,3 +83,29 @@ body{
     bottom: 35%;
     left: 3%;
 }
+@media screen  and (max-width:600px){
+    #book_btn{
+        position: absolute;
+        bottom: 5%;
+      }
+}
+@media screen and (max-width:450px){
+    #logo{
+        width: 100%;
+        flex-direction: column;
+    }
+    #restraunt,#welcome ,#line  {
+        word-break: break-all;
+    }
+}
+@media screen and (max-width:150px){
+    #restraunt{
+        font-size: 20px;
+    }
+    #welcome{
+        font-size: 22px;
+    }
+    #line{
+        font-size: 15px;
+    }
+}

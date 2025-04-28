@@ -8,12 +8,12 @@ html{
 }
 #content{
     width: auto;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
+    margin-top: 100px;
 }
 body{
     height: 100%;
@@ -24,7 +24,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 table,th{
     border: 1px solid black;
@@ -33,15 +32,19 @@ table,th{
     font-family: cursive;
     background-color: white;
 }
-tr{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#first{
+    width: 100%;
+    
     font-family: cursive;
-    border:1px solid black;
+   text-align: center;
 }
+
 td,th{
     padding: 10px;
+}
+.td{
+    border: 1px solid black;
+    text-align: center;
 }
 #btns{
     margin: 10px;
@@ -60,6 +63,17 @@ td,th{
     border-style: none;
     border: 2px solid black;
     background-color: lightsalmon;
+    cursor: pointer;
+}
+#table_display{
+    width: 150px;
+    height: 35px;
+    font-family: cursive;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: none;
+    border: 2px solid black;
+    background-color:lavenderblush;
     cursor: pointer;
 }
 #sort{
@@ -147,13 +161,28 @@ label,input{
 #table_no{
     width: 100%;
 }
-#dialog_box_edit{
-    border-radius: 20px;
-    position: absolute;
-    display: none;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    padding: 0;
+#table_div{
+    width: 100%;
+    height: 80%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+@media screen and (max-width:650px){
+    #content{
+        width: 100%;
+        height: 100%;
+    }
+    #table_div{
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        scrollbar-width: none;
+    }
+    
+}
+@media screen and (max-width:550px){
+    #btns{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 }

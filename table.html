@@ -12,9 +12,10 @@
 <body>
     <div id="content">
         <div id="btns">
-            <input type="number" placeholder="enter the table number" style="width: 200px; border-radius: 10px;">
-            <button id="sort" onclick="style_change_sort()" onmouseleave="style_change1_sort()">Sort</button>
-            <button id="add" onclick="style_change_add()" onmouseleave="style_change1_add()">Add</button>
+            <input id="sort_inp" type="number" placeholder="enter the table number" style="width: 200px; border-radius: 10px;">
+            <button id="sort" onclick="style_change_sort()" >Sort</button>
+            <button id="add" onclick="style_change_add()" >Add</button>
+            <a href="admin.html"><button id="table_display">Table Display</button></a>
         </div>
         <div id="table_div">
             <table id="table">
@@ -28,9 +29,7 @@
                     <th>Actions</th>
                 </tr>
                 <tr id="first">
-                    <td>No Records Available</td>
-                    <td><i class="fa-solid fa-pen" style="color: #ff0033;" onclick="edit_page()"></i></td>
-                    <td><i class="fa-solid fa-trash" onclick="del_icon(this)"></i></td>
+                    <td colspan="7" id="td_first">No Records Available</td>
                 </tr>
             </table>
         </div>
@@ -49,8 +48,17 @@
                 <label for="table_no">Table Number:</label>
             </div>
             <div class="input">
-                <select name="table_no" id="table_no">
-                    <option>101</option>
+                <select name="table_no" id="table_no" oninput="set_no_people()" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
                 </select>
             </div>
             </div>
@@ -59,7 +67,7 @@
                     <label for="booked_by" style="width: 100%;">Booked by:</label>
                 </div>
                 <div class="input">
-                    <input id="booker_name" type="text" name="booked_by" style="width: 100%;" />
+                    <input id="booker_name" type="text" name="booked_by" style="width: 100%;" required/>
                 </div>
             </div>
             <div class="form_ele">
@@ -67,7 +75,7 @@
                     <label for="phone">Phone Number:</label>
                 </div>
                 <div class="input">
-                    <input id="phone_no" type="number" name="phone" max="1000000000" pattern="[0-9]{10}"/>
+                    <input id="phone_no" type="number" name="phone" pattern="[0-9]{10}" required/>
                     <p id="no_people_err"></p>
                 </div>
             </div>
@@ -76,7 +84,7 @@
                     <label for="no_people">No of Persons:</label>
                 </div>
                 <div class="input">
-                    <input id="no_people" type="number" name="no_people" max="10" min="5" />
+                    <input id="no_people" type="number" name="no_people" min="1" max="5" required/>
                 </div>
             </div>
             <div class="form_ele">
@@ -84,7 +92,7 @@
                     <label for="table_no">Dining Start Time:</label>
                 </div>
                 <div class="input">
-                    <input id="dining_start" type="datetime-local" name="table_no" oninput="set_end()"/>
+                    <input id="dining_start" type="datetime-local" name="table_no" oninput="set_end()" required/>
                 </div>
             </div>
             <div class="form_ele">
@@ -92,93 +100,22 @@
                     <label for="table_no">Dining End Time:</label>
                 </div>
                 <div class="input">
-                    <input id="dining_end" type="datetime-local" name="table_no" />
+                    <input id="dining_end" type="datetime-local" name="table_no" required/>
                 </div>
             </div>
             <div class="form_ele">
                 <div class="save">
-                    <button id="save-btn" onclick="save()">Save</button>
+                    <button id="save-btn" onclick="save(event)">Save</button>
                 </div>
                 <div class="reset">
-                    <button id="reset-btn">Reset</button>
+                    <button id="reset-btn" type="button" onclick="reset(event)">Reset</button>
                 </div>
             </div>
         </form>
     </dialog>
 
-    <dialog id="dialog_box_edit">
-        <div id="top-div">
-        <p id="add_label">Edit</p>
-        <button id="cross-btn" onclick="close_dialog_edit()">
-            <i class="fa-solid fa-xmark" style="font-size: 20px;width: 100%;height: 100%;color:black;display: flex;align-items: center;justify-content: center;"></i>
-        </button>
-    </div>
-        <form id="form">
-            <div class="form_ele">
-                <div class="label">
-                <label for="table_no">Table Number:</label>
-            </div>
-            <div class="input">
-                <select name="table_no" id="table_no_edit">
-                    <option>101</option>
-                </select>
-            </div>
-            </div>
-            <div class="form_ele">
-                <div class="label">
-                    <label for="booked_by" style="width: 100%;">Booked by:</label>
-                </div>
-                <div class="input">
-                    <input id="booker_name_edit" type="text" name="booked_by" style="width: 100%;" />
-                </div>
-            </div>
-            <div class="form_ele">
-                <div class="label">
-                    <label for="phone">Phone Number:</label>
-                </div>
-                <div class="input">
-                    <input id="phone_no_edit" type="number" name="phone" max="1000000000" pattern="[0-9]{10}"/>
-                    <p id="no_people_err"></p>
-                </div>
-            </div>
-            <div class="form_ele">
-                <div class="label">
-                    <label for="no_people">No of Persons:</label>
-                </div>
-                <div class="input">
-                    <input id="no_people_edit" type="number" name="no_people" max="10" min="5" />
-                </div>
-            </div>
-            <div class="form_ele">
-                <div class="label">
-                    <label for="table_no">Dining Start Time:</label>
-                </div>
-                <div class="input">
-                    <input id="dining_start_edit" type="datetime-local" name="table_no" oninput="set_end()"/>
-                </div>
-            </div>
-            <div class="form_ele">
-                <div class="label">
-                    <label for="table_no">Dining End Time:</label>
-                </div>
-                <div class="input">
-                    <input id="dining_end_edit" type="datetime-local" name="table_no" />
-                </div>
-            </div>
-            <div class="form_ele">
-                <div class="save">
-                    <button id="save-btn_edit" >Save</button>
-                </div>
-                <div class="reset">
-                    <button id="reset-btn_edit">Reset</button>
-                </div>
-            </div>
-        </form>
-    </dialog>
 
     <script src="table.js"></script>
 </body>
 
 </html>
-<!-- <td><i class="fa-solid fa-pen" style="color: #ff0033;" onclick="edit_page()"></i></td>
-<td><i class="fa-solid fa-trash" onclick="del_icon(this)"></i></td> -->
