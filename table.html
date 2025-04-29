@@ -10,15 +10,22 @@
 </head>
 
 <body>
+    <div id="logo">
+        <div id="icon">
+            <a href="index.html"><i class="fa-duotone fa-solid fa-utensils fa-flip" style="font-size: 30px;width: 100%;height: 100%;color:white;display: flex;align-items: center;justify-content: center;"></i></a>
+        </div>
+        <p id="restraunt">Restraunt Management System</p>
+    </div>
     <div id="content">
         <div id="btns">
-            <input id="sort_inp" type="number" placeholder="enter the table number" style="width: 200px; border-radius: 10px;">
-            <button id="sort" onclick="style_change_sort()" >Sort</button>
+            <input id="sort_inp" type="number" placeholder="enter the table number">
+            <button id="sort" onclick="style_change_sort()" >Filter</button>
             <button id="add" onclick="style_change_add()" >Add</button>
             <a href="admin.html"><button id="table_display">Table Display</button></a>
         </div>
         <div id="table_div">
             <table id="table">
+                <thead>
                 <tr>
                     <th>Table Number</th>
                     <th>Booked By</th>
@@ -28,9 +35,12 @@
                     <th>Dining End Time</th>
                     <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody id="table_body">
                 <tr id="first">
                     <td colspan="7" id="td_first">No Records Available</td>
                 </tr>
+            </tbody>
             </table>
         </div>
     </div>
@@ -75,7 +85,7 @@
                     <label for="phone">Phone Number:</label>
                 </div>
                 <div class="input">
-                    <input id="phone_no" type="number" name="phone" pattern="[0-9]{10}" required/>
+                    <input id="phone_no" type="tel" name="phone" pattern="[0-9]{10}" required/>
                     <p id="no_people_err"></p>
                 </div>
             </div>
@@ -105,7 +115,7 @@
             </div>
             <div class="form_ele">
                 <div class="save">
-                    <button id="save-btn" onclick="save(event)">Save</button>
+                    <button id="save-btn" type="submit" onclick="save(event)">Save</button>
                 </div>
                 <div class="reset">
                     <button id="reset-btn" type="button" onclick="reset(event)">Reset</button>

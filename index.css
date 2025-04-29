@@ -11,7 +11,7 @@ body{
     width: 100%;
     background-image: url("/img/ai-generated-beautuful-fast-food-background-with-copy-space-free-photo.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,6 +32,7 @@ body{
 }
 
 #restraunt{
+    width: 90%;
     color:white;
     font-size: 27px;
     font-family:cursive;
@@ -72,17 +73,27 @@ body{
     background-color:darkcyan;
     color: white;
     font-family:cursive;
-    font-weight: bold;
+    font-size: 20px;
     padding: 0;
     cursor: pointer;
 }
+#book_now:hover{
+    background-color: rgb(0,139,139,0.6);
+}
+a{
+    width: 50%;
+}
 #book_btn{
-    width: 130px;
+    width: 280px;
     height: 50px;
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     bottom: 35%;
     left: 3%;
 }
+
 @media screen  and (max-width:600px){
     #book_btn{
         position: absolute;
@@ -90,22 +101,77 @@ body{
       }
 }
 @media screen and (max-width:450px){
+    
     #logo{
         width: 100%;
+        height: 25%;
         flex-direction: column;
     }
-    #restraunt,#welcome ,#line  {
-        word-break: break-all;
+    
+}
+@media screen and (max-width:320px){
+    #book_btn{
+        height: 20%;
+        width: 60%;
+        flex-direction: column;
+    }
+    a{
+        height: 100%;
+        width: 100%;
+    }
+    #welcome{
+        font-size: 40px;
     }
 }
-@media screen and (max-width:150px){
+@media screen and (max-width:210px){
+    #welcome{
+        font-size: 22px;
+    }
+}
+@media screen and (max-width:170px){
     #restraunt{
-        font-size: 20px;
+        height: 60%;
+        font-size: 18px;
+        width: 100%;
+        padding: 5px;
     }
     #welcome{
         font-size: 22px;
     }
     #line{
         font-size: 15px;
+    }
+    #book_now{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:122px){
+    #logo{
+        height: 40%;
+    }
+    #restraunt{
+        height: 60%;
+        font-size: 15px;
+        width: 100%;
+        padding: 5px;
+        word-break: break-all;
+    }
+    #welcome{
+        width: 100%;
+        font-size: 22px;
+        word-break: break-all;
+    }
+    #line{
+        width: 100%;
+        font-size: 15px;
+        word-break: break-all;
+    }
+    #book_now{
+        width: 100%;
+        font-size: 12px;
+    }
+    #book_btn{
+        height: 12%;
+        width: 80%;
     }
 }

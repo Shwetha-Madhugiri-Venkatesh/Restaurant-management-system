@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="inp" type="datetime-local" oninput="load()">
+    <script>
+        function load(){
+        let input = document.getElementById("inp").value;
+        let date_format = new Date(input)
+        console.log(date_format.toLocaleDateString()+" "+date_format.toLocaleTimeString());
+        }
+    </script>
+</body>
+</html>
