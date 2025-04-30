@@ -10,7 +10,7 @@ html{
 body{
     height: 100%;
     width: 100%;
-    background-image: url("/img/new10.avif");
+    background-image: url("/img/new2.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: flex;
@@ -66,7 +66,7 @@ body{
     cursor: pointer;
     border-style: none;
     background-color:greenyellow;
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: cursive;
     margin-right: 20px;
 }
@@ -97,7 +97,7 @@ body{
 #div_img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: 100% 100%;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }

@@ -101,7 +101,7 @@ td,th{
     height: 35px;
     font-family: cursive;
     font-weight: bold;
-    border-radius: 20px;
+    border-radius: 10px;
     border-style: none;
     border: 2px solid black;
     background-color: lightsalmon;
@@ -118,11 +118,12 @@ td,th{
     height: 35px;
     font-family: cursive;
     font-weight: bold;
-    border-radius: 20px;
+    border-radius: 10px;
     border-style: none;
     border: 2px solid black;
     background-color:lavenderblush;
     cursor: pointer;
+
 }
 #table_display:hover{
     background-color: rgba(255,240,245,0.8);
@@ -229,7 +230,7 @@ label,input{
 }
 
 tr:hover{
-    background-color:lightgray;
+    background-color:rgba(211,211,211,0.7);
 }
 #sort_inp{
     width: 200px; border-radius: 10px;

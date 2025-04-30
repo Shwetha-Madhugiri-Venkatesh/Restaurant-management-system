@@ -242,7 +242,7 @@ function mouse_leave_edit(obj){
     obj.style.color="black";
 }
 function mouse_over_delete(obj){
-    obj.style.color="lightgreen";
+    obj.style.color="greenyellow";
 }
 function mouse_leave_delete(obj){
     obj.style.color="black";
