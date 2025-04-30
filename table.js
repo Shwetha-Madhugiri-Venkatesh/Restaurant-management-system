@@ -11,14 +11,18 @@ let no_people;
 let dining_end;
 let dining_start_time;
 
+
 function style_change_add() {
     document.getElementById("table_no").value = "";
+    document.getElementById("table_no").removeAttribute("disabled");
     document.getElementById("booker_name").value = "";
     document.getElementById("phone_no").value = "";
     document.getElementById("no_people").value = "";
     document.getElementById("dining_end").value = "";
     document.getElementById("dining_start").value = "";
-   
+    document.getElementById("add_label").innerHTML="Add";
+    let reset_btn = document.getElementById("reset-btn");
+    reset_btn.setAttribute("onclick", `reset1()`);
     dialog_box.showModal();
     
     dialog_box.style.display = "flex";
@@ -27,21 +31,54 @@ function style_change_add() {
 function style_change_sort() {
    
     let extract = JSON.parse(localStorage.getItem("data")) || [];
-    let input = document.getElementById("sort_inp").value;
+    let input1 = document.getElementById("sort_inp").value;
+    let input = Number(document.getElementById("sort_inp").value);
     let new_arr = extract.filter(item =>item[0] ==input);
-
+    if(input1==""){
+        for(let y=0;y<extract.length;y++){
+            let dining_start_time_format=new Date(extract[y][4]);
+            dining_start_time_format = dining_start_time_format.toLocaleDateString()+" "+dining_start_time_format.toLocaleTimeString();
+            dining_end_format=new Date(extract[y][5]);
+            dining_end_format = dining_end_format.toLocaleDateString()+" "+dining_end_format.toLocaleTimeString();
+            extract[y][4]=dining_start_time_format;
+            extract[y][5]=dining_end_format;
+            }
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+        for (let y = 0; y < extract.length; y++) {
+            let row = document.createElement("tr");
+    
+            for (let x = 0; x < 6; x++) {
+                let data = document.createElement("td");
+                data.setAttribute("class", "td");
+                let text = document.createTextNode(extract[y][x]);
+                data.appendChild(text);
+                row.appendChild(data);
+            }
+    
+            let icon = document.createElement("td");
+            icon.setAttribute("class", "td");
+            icon.innerHTML = `
+                <i class="fa-solid fa-pen" style="margin-right: 10px; cursor: pointer;" onclick="edit_page(${y})"  onmouseover="mouse_over_delete(this)" onmouseleave="mouse_leave_delete(this)"></i>
+                <i class="fa-solid fa-trash" style="color: #000; cursor: pointer;" onclick="del_icon(${y})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
+            `;
+            row.appendChild(icon);
+            table.appendChild(row);
+        }
+        return;
+    }
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }
 
     if (new_arr.length === 0) {
-        let row = document.createElement("tr");
-        let data = document.createElement("td");
-        data.setAttribute("colspan", "7");
-        data.style.textAlign = "center";
-        data.textContent = "No matching records found.";
-        row.appendChild(data);
-        table.appendChild(row);
+        let filt_row = document.createElement("tr");
+        let filt_data = document.createElement("td");
+        filt_data.setAttribute("colspan","7");
+        filt_data.innerHTML = "No matching record found!";
+        filt_row.appendChild(filt_data);
+        table.appendChild(filt_row);
         return;
     }
     for(let y=0;y<extract.length;y++){
@@ -66,7 +103,7 @@ function style_change_sort() {
         let icon = document.createElement("td");
         icon.setAttribute("class", "td");
         icon.innerHTML = `
-            <i class="fa-solid fa-pen" style="margin-right: 10px; cursor: pointer;" onclick="edit_page(${y})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
+            <i class="fa-solid fa-pen" style="margin-right: 10px; cursor: pointer;" onclick="edit_page(${y})"  onmouseover="mouse_over_delete(this)" onmouseleave="mouse_leave_delete(this)"></i>
             <i class="fa-solid fa-trash" style="color: #000; cursor: pointer;" onclick="del_icon(${y})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
         `;
         row.appendChild(icon);
@@ -111,13 +148,6 @@ function save(event) {
     if (firstRow) {
         firstRow.remove();
     }
-    let extract = JSON.parse(localStorage.getItem("data"))||[];
-    for (let x = 0; x < extract.length; x++) {
-        if (table_no == extract[x][0] && (dining_start_time >= extract[x][4] && dining_end <= extract[x][5])) {
-            alert("The table is already booked at this time! Try for next possible time");
-            return;
-        }
-    }
     let today = new Date();
     let diningStartTime = new Date(dining_start_time);
     if(diningStartTime<today){
@@ -127,6 +157,13 @@ function save(event) {
     if(dining_start_time == dining_end){
         alert("The start and end dates can not be same!");
         return;
+    }
+    let extract = JSON.parse(localStorage.getItem("data"))||[];
+    for (let x = 0; x < extract.length; x++) {
+        if (table_no == extract[x][0] && (dining_start_time <= extract[x][5] || dining_end <= extract[x][5])) {
+            alert("The table is already booked at this time! Try for next possible time");
+            return;
+        }
     }
     let dining_start_time_format=new Date(dining_start_time);
     dining_start_time_format = dining_start_time_format.toLocaleDateString()+" "+dining_start_time_format.toLocaleTimeString();
@@ -149,7 +186,7 @@ function save(event) {
     let icon = document.createElement("td");
     icon.setAttribute("class", "td");
     icon.innerHTML = `
-    <i class="fa-solid fa-pen" style=" margin-right: 10px; cursor: pointer;" onclick="edit_page(${extract.length})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
+    <i class="fa-solid fa-pen" style=" margin-right: 10px; cursor: pointer;" onclick="edit_page(${extract.length})"  onmouseover="mouse_over_delete(this)" onmouseleave="mouse_leave_delete(this)"></i>
     <i class="fa-solid fa-trash" style="color: #000; cursor: pointer;" onclick="del_icon(${extract.length})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
 `;
     row.appendChild(icon);
@@ -159,7 +196,7 @@ function save(event) {
 
 
 window.onload = function () {
-    let extract = JSON.parse(localStorage.getItem("data"))||[];
+    let extract = JSON.parse(localStorage.getItem("data")) || [];
     rows = extract;
     console.log(rows);
     console.log(extract);
@@ -191,7 +228,7 @@ window.onload = function () {
         let icon = document.createElement("td");
         icon.setAttribute("class", "td");
         icon.innerHTML = `
-            <i id=icon1${y} class="fa-solid fa-pen" style="margin-right: 10px; cursor: pointer;" onclick="edit_page(${y})" onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)" ></i>
+            <i id=icon1${y} class="fa-solid fa-pen" style="margin-right: 10px; cursor: pointer;" onclick="edit_page(${y})" onmouseover="mouse_over_delete(this)" onmouseleave="mouse_leave_delete(this)" ></i>
             <i class="fa-solid fa-trash" style="color: #000; cursor: pointer;" onclick="del_icon(${y})"  onmouseover="mouse_over_edit(this)" onmouseleave="mouse_leave_edit(this)"></i>
         `;
         row.appendChild(icon);
@@ -202,6 +239,12 @@ window.onload = function () {
 }
 
 function mouse_leave_edit(obj){
+    obj.style.color="black";
+}
+function mouse_over_delete(obj){
+    obj.style.color="lightgreen";
+}
+function mouse_leave_delete(obj){
     obj.style.color="black";
 }
 function del_icon(index) {
@@ -225,9 +268,16 @@ function del_icon(index) {
     }
 }
 
-function reset(event) {
-
+function reset1(){
     document.getElementById("table_no").value = "";
+    document.getElementById("booker_name").value = "";
+    document.getElementById("phone_no").value = "";
+    document.getElementById("no_people").value = "";
+    document.getElementById("dining_end").value = "";
+    document.getElementById("dining_start").value = "";
+}
+
+function edit_reset(){
     document.getElementById("booker_name").value = "";
     document.getElementById("phone_no").value = "";
     document.getElementById("no_people").value = "";
@@ -244,9 +294,9 @@ function edit_page(index) {
         alert("Cannot edit this record. Dining has already started!");
         return;
     }
-
     document.getElementById("add_label").innerHTML = "Edit";
     let table_no_edit = document.getElementById("table_no");
+    table_no_edit.setAttribute("disabled","true");
     let booker_edit = document.getElementById("booker_name");
     let phone_edit = document.getElementById("phone_no");
     let no_people_edit = document.getElementById("no_people");
@@ -255,7 +305,8 @@ function edit_page(index) {
     let arr1 = [table_no_edit, booker_edit, phone_edit, no_people_edit, dining_start_time_edit, dining_end_edit];
     let save_btn = document.getElementById("save-btn");
     save_btn.setAttribute("onclick", `edit_save(${index},event)`);
-
+    let reset_btn = document.getElementById("reset-btn");
+    reset_btn.setAttribute("onclick", `edit_reset()`);
     for (let x = 0; x < 6; x++) {
         arr1[x].value = extract[index][x];
     }
@@ -268,6 +319,7 @@ function edit_page(index) {
 
 function edit_save(index,event) {
     event.preventDefault();
+    let extract = JSON.parse(localStorage.getItem("data")) || [];
     const form = document.getElementById('form');
     if (!form.checkValidity()) {
         form.reportValidity();
@@ -289,8 +341,13 @@ function edit_save(index,event) {
         alert("The start and end dates can not be same!");
         return;
     }
+    for (let x = 0; x < extract.length; x++) {
+        if ( edit_table_no_value == extract[x][0] && (edit_dining_start_value <= extract[x][5] || edit_dinind_end_value  <= extract[x][5])) {
+            alert("The table is already booked at this time! Try for next possible time");
+            return;
+        }
+    }
     let edit_arr_value = [edit_table_no_value, edit_booker_value, edit_phone_value, edit_no_people_value, edit_dining_start_value, edit_dinind_end_value];
-    let extract = JSON.parse(localStorage.getItem("data")) || [];
     for (let x = 0; x < 6; x++) {
         extract[index][x] = edit_arr_value[x];
     }
@@ -298,3 +355,19 @@ function edit_save(index,event) {
     localStorage.setItem("data", JSON.stringify(rows));
     location.reload();
 }
+
+function del_record(){
+    let extract = JSON.parse(localStorage.getItem("data")) || [];
+    const now = new Date();
+    let extract1 = extract.filter(filter_func);
+    function filter_func(record){
+        const diningEndTime = new Date(record[5]);
+        return diningEndTime > now;
+    };
+    localStorage.setItem("data", JSON.stringify(extract1));
+    rows = extract1;
+    if(extract1.length<extract.length){
+        location.reload();
+    }
+}
+setInterval(del_record,1000);

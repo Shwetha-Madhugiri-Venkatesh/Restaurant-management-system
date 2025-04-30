@@ -18,10 +18,9 @@
     </div>
     <div id="content">
         <div id="btns">
-            <input id="sort_inp" type="number" placeholder="enter the table number">
-            <button id="sort" onclick="style_change_sort()" >Filter</button>
+            <input id="sort_inp" type="string" placeholder="Enter the table number" oninput="style_change_sort()">
             <button id="add" onclick="style_change_add()" >Add</button>
-            <a href="admin.html"><button id="table_display">Table Display</button></a>
+            <a href="admin.html"><button id="table_display">Grid View</button></a>
         </div>
         <div id="table_div">
             <table id="table">
@@ -118,7 +117,7 @@
                     <button id="save-btn" type="submit" onclick="save(event)">Save</button>
                 </div>
                 <div class="reset">
-                    <button id="reset-btn" type="button" onclick="reset(event)">Reset</button>
+                    <button id="reset-btn" type="button" onclick="reset1()">Reset</button>
                 </div>
             </div>
         </form>

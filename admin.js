@@ -6,7 +6,7 @@ if(local_data.length>0){
             let table_div = document.createElement("div");
             table_div.setAttribute("id","table_div");
             table_div.innerHTML=`
-                <img id="div_img" src="img/table_img.jpg" alt="table">
+                <img id="div_img" src="img/new8.jpg" alt="table">
                 <p>table no:${local_data[x][0]}<p/>
                 <p>Booked by:${local_data[x][1]}<p/>
                 <p>Amount:Rs ${(local_data[x][3])*1450}/-<p/>

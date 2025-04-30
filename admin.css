@@ -10,18 +10,19 @@ html{
 body{
     height: 100%;
     width: 100%;
-    background-image: url("/img/admin.jpg");
+    background-image: url("/img/new10.avif");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
 }
 #logo{
     position: absolute;
-    width: 450px;
+    width: 80%;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -54,27 +55,27 @@ body{
     flex-direction: column;
 }
 #button_div{
-    width: 100%;
+    width: 20%;
     display: flex;
     justify-content: flex-end;
     margin: 10px -10px;
 }
 #add_table{
-    width: 100px;
+   
     height: 30px;
     cursor: pointer;
     border-style: none;
     background-color:greenyellow;
     border-radius: 20px;
     font-family: cursive;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 #table_container{
     width: 80%;
-    height: auto;
-    margin: 20px;
+    height: 80%;
     display: flex;
     flex-direction: row;
+    margin:auto;
     align-items: center;
     justify-content: center;
     gap: 50px;
@@ -147,16 +148,74 @@ form{
     right: 0;
     margin: 5px;
 }
-@media screen and (max-width:150px){
-    #table_div{
-        width: 100%;
-    }
-    p{
-        font-size: 8px;
-    }
+#header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+@media screen and (max-width:635px){
     #add_table{
-        padding: 0;
-        margin: 0;
+        width: 100px;
         font-size: 10px;
     }
+    #header{
+        width: 100%;
+        height: 20%;
+       }
 }
+@media screen and (max-width:320px){
+    #restraunt{
+     font-size: 25px;
+    }
+    #logo{
+        height: 100px;
+    }
+ }
+ @media screen and (max-width:246px){
+    #header{
+        flex-direction: column;
+    }
+    #logo{
+        width: 100%;
+    }
+    #button_div{
+        width: 100%;
+    }
+    #restraunt{
+        font-size: 15px;
+       }
+ }
+ @media screen and (max-width:174px){
+    #header{
+        height: 33%;
+    }
+         #restraunt{
+        align-items: flex-start;
+          font-size: 15px;
+          word-break: break-all;
+         }
+         #logo{
+          width: 100%;
+      }
+ }
+@media screen and (max-width:106px){
+    #restraunt{
+        font-size: 10px;
+        word-break: break-all;
+       }
+       #button_div{
+        margin: 0;
+       }
+       #add_table{
+        width: 100%;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+      }
+      p{
+        word-break: break-all;
+      }
+}
+ 
