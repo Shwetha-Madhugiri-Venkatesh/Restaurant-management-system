@@ -341,6 +341,7 @@ function edit_save(index,event) {
         alert("The start and end dates can not be same!");
         return;
     }
+    extract.splice(index,1);
     for (let x = 0; x < extract.length; x++) {
         if ( edit_table_no_value == extract[x][0] && (edit_dining_start_value <= extract[x][5] || edit_dinind_end_value  <= extract[x][5])) {
             alert("The table is already booked at this time! Try for next possible time");
@@ -348,9 +349,7 @@ function edit_save(index,event) {
         }
     }
     let edit_arr_value = [edit_table_no_value, edit_booker_value, edit_phone_value, edit_no_people_value, edit_dining_start_value, edit_dinind_end_value];
-    for (let x = 0; x < 6; x++) {
-        extract[index][x] = edit_arr_value[x];
-    }
+    extract.splice(index,0,edit_arr_value);
     rows = extract;
     localStorage.setItem("data", JSON.stringify(rows));
     location.reload();
